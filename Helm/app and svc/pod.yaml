@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app:  myapp
+    name: myapp
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app:  myapp
+    spec:
+      containers:
+      - name:  mongo
+        image: depuis2031/spring-boot-mongo:latest
+        resources:
+          limits:
+            cpu: 200m
+            memory: 500Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi  
+
+status: {}
+
+
+
+#To change your current context Namespace:
+#kubectl config set-context --current --namespace=NamespaceName  
+
+#

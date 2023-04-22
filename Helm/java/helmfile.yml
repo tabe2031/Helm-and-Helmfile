@@ -1,0 +1,26 @@
+repositories:
+  - name: prometheus
+    url: https://prometheus-community.github.io/helm-charts
+  - name: ingress-nginx
+    url: https://kubernetes.github.io/ingress-nginx
+
+releases:
+  - name: javachart
+    namespace: dev 
+    chart: ./javachart 
+    installed: true
+  - name: javachart2
+    namespace: prod 
+    chart: ./javachart2 
+    installed: true 
+  - name: prometheus  #Endeavour to change names after running the file cos of cached data and the system will return error msg saying the name already exist.
+    namespace: prometheus
+    chart: prometheus/prometheus
+    set:   #Here we intend to make sure that when RBAC is deployed to our cluster, the permissions won't apply to prometheus.
+      - name: rbac.create 
+        value: false   
+    installed: true 
+  - name: ingress-nginx  #This is a third party app for traffic
+    namespace: ingress-nginx
+    chart: ingress-nginx/ingress-nginx
+    installed: true
